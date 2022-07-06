@@ -8,39 +8,70 @@ stages:
     pool:
       name: Hosted Ubuntu 1604
     steps:
+    - task: TerraformInstaller@0
+      inputs:
+        terraformVersion: 'latest'
+    - task: TerraformTaskV3@3
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        backendServiceArm: 'deploy terraform'
+        backendAzureRmResourceGroupName: 'az-terraform'
+        backendAzureRmStorageAccountName: 'terraformstoragedatmq'
+        backendAzureRmContainerName: 'terraform'
+        backendAzureRmKey: 'terraformState'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+    - task: TerraformTaskV3@3
+      inputs:
+        provider: 'azurerm'
+        command: 'validate'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+    - task: TerraformTaskV3@3
+      inputs:
+        provider: 'azurerm'
+        command: 'plan'
+        environmentServiceNameAzureRM: 'deploy terraform'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+    - task: TerraformTaskV3@3
+      inputs:
+        provider: 'azurerm'
+        command: 'apply'
+        environmentServiceNameAzureRM: 'deploy terraform'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+
     # Needed for Terraform VM deployment
     # - task: InstallSSHKey@0
     #   inputs:
     #     knownHostsEntry: 'KNOWN_HOSTS_STRING'
     #     sshPublicKey: 'PUBLIC_KEY'
     #     sshKeySecureFile: 'id_rsa'
-    - task: ArchiveFiles@2
-      displayName: 'Archive FakeRestAPI'
-      inputs:
-        rootFolderOrFile: 'path/to/fakerestapi'
-        includeRootFolder: false
-        archiveType: 'zip'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip'
-    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
-      displayName: 'Upload Package'
-      artifact: drop-fakerestapi
-- stage:
-  jobs:
-  - deployment: FakeRestAPI
-    pool:
-      vmImage: 'Ubuntu-16.04'
-    environment: 'TEST'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: AzureWebApp@1
-            displayName: 'Deploy Azure Web App'
-            inputs:
-              azureSubscription: ''
-              appName: ''
-              appType: webApp
-              package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
+    # - task: ArchiveFiles@2
+    #   displayName: 'Archive FakeRestAPI'
+    #   inputs:
+    #     rootFolderOrFile: 'path/to/fakerestapi'
+    #     includeRootFolder: false
+    #     archiveType: 'zip'
+    #     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip'
+    # - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
+    #   displayName: 'Upload Package'
+    #   artifact: drop-fakerestapi
+# - stage:
+#   jobs:
+#   - deployment: FakeRestAPI
+#     pool:
+#       vmImage: 'Ubuntu-16.04'
+#     environment: 'TEST'
+#     strategy:
+#       runOnce:
+#         deploy:
+#           steps:
+#           - task: AzureWebApp@1
+#             displayName: 'Deploy Azure Web App'
+#             inputs:
+#               azureSubscription: ''
+#               appName: ''
+#               appType: webApp
+#               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
   # - deployment: VMDeploy
   #   displayName: NAME
   #   environment:
