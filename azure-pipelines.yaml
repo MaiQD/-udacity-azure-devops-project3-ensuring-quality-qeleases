@@ -16,7 +16,7 @@ stages:
     - task: CopyFiles@2
       displayName: Copy variable file to terraform folder
       inputs:
-        SourceFolder: '$(downloadtfvars.secureFilePath)'
+        SourceFolder: '$(Agent.TempDirectory)'
         Contents: '**'
         TargetFolder: '$(System.DefaultWorkingDirectory)/terraform'
         OverWrite: true
