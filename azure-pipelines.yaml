@@ -46,15 +46,17 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'plan'
-        environmentServiceNameAzureRM: 'deploy terraform'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+        commandOptions: '-out=tfplan -var-file=terraform.tfvars'
+        environmentServiceNameAzureRM: 'deploy terraform'
     - task: TerraformTaskV3@3
       displayName: 'Apply Terraform'
       inputs:
         provider: 'azurerm'
         command: 'apply'
-        environmentServiceNameAzureRM: 'deploy terraform'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+        commandOptions: 'tfplan -auto-approve'
+        environmentServiceNameAzureRM: 'deploy terraform'
 
     # Needed for Terraform VM deployment
     # - task: InstallSSHKey@0
