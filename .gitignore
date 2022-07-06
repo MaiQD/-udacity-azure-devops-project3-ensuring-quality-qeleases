@@ -1,0 +1,5 @@
+terraform/.terraform.lock.hcl
+terraform/.terraform/providers/registry.terraform.io/hashicorp/azurerm/3.12.0/windows_amd64/terraform-provider-azurerm_v3.12.0_x5.exe
+terraform/.terraform/terraform.tfstate
+terraform/terraform.tfvars
+terraform/terraform-local.tfvars
