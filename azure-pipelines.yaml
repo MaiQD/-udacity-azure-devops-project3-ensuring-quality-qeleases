@@ -8,10 +8,24 @@ stages:
     pool:
       vmImage: ubuntu-20.04
     steps:
+    - task: DownloadSecureFile@1
+      name: downloadtfvars
+      displayName: Download terraform.tfvars
+      inputs:
+        secureFile: 'terraform.tfvars'
+    - task: CopyFiles@2
+      displayName: Copy variable file to terraform folder
+      inputs:
+        SourceFolder: '$(downloadtfvars.secureFilePath)'
+        Contents: '**'
+        TargetFolder: '$(System.DefaultWorkingDirectory)/terraform'
+        OverWrite: true
     - task: TerraformInstaller@0
+      displayName: install terraform
       inputs:
         terraformVersion: 'latest'
     - task: TerraformTaskV3@3
+      displayName: 'Init Terraform'
       inputs:
         provider: 'azurerm'
         command: 'init'
@@ -22,17 +36,20 @@ stages:
         backendAzureRmKey: 'terraformState'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
     - task: TerraformTaskV3@3
+      displayName: 'Validate Terraform'
       inputs:
         provider: 'azurerm'
         command: 'validate'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
     - task: TerraformTaskV3@3
+      displayName: 'Plan Terraform'
       inputs:
         provider: 'azurerm'
         command: 'plan'
         environmentServiceNameAzureRM: 'deploy terraform'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
     - task: TerraformTaskV3@3
+      displayName: 'Apply Terraform'
       inputs:
         provider: 'azurerm'
         command: 'apply'
