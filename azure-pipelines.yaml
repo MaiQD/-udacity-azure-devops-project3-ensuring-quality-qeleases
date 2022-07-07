@@ -149,5 +149,5 @@ stages:
         displayName: Run Regression Tests
         continueOnError: true
         inputs:
-          script: 'newman run starterapis.json'
+          script: 'newman run StarterAPIs.json'
           workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
