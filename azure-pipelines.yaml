@@ -162,12 +162,12 @@ stages:
         inputs:
           jmeterVersion: '5.4.2'
       - task: Bash@3
-      inputs:
-        targetType: 'inline'
-        script: |
-          # Write your commands here
-          jmeter -n -t Starter.jmx\
-          -e -o log/StarterReport
-        workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter'
+        inputs:
+          targetType: 'inline'
+          script: |
+            # Write your commands here
+            jmeter -n -t Starter.jmx\
+            -e -o log/StarterReport
+          workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter'
       
       
