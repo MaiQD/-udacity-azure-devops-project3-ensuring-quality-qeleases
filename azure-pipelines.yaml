@@ -167,7 +167,7 @@ stages:
           script: |
             # Write your commands here
             mkdir log
-            jmeter -n -t Starter.jmx\
+            jmeter -n -t Starter.jmx \
             -e -o log/StarterReport
           workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter'
       
