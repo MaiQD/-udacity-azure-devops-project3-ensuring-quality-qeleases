@@ -51,7 +51,7 @@
             <pre>
 var root = 'http://fakerestapi.azurewebsites.net';
 $.ajax({
-    url: root + '/posts/1',
+    url: root + '/api/v1/activities',
     method: 'GET'
 }).then(function(data) {
     alert(data);
@@ -92,7 +92,7 @@ $.ajax({
             var root = 'http://fakerestapi.azurewebsites.net';
 
             $.ajax({
-                url: root + '/api/activities/1',
+                url: root + '/api/v1/activities/1',
                 method: 'GET'
             }).then(function (data) {
                 var str = JSON.stringify(data, null, '\t')
