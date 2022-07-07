@@ -24,7 +24,7 @@ stages:
         knownHostsEntry: 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=='
         sshPublicKey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC/18rZR36phPmFC2u5b2/RK5S5uALnAYPfOs2WTKobrU+Iv4pXwVomVCdjODZygNFE9QXiE4R+cKo6qfivg4I7MOXrSukRAm8fzaoAmkByM4myHMXQGHQ0vEsoB0X80VsSFbY7/nciD66YPYNHWzJsgXLuZnQOjOc2ZugXL012kEbcrNEv3Su04U6DhBq1Qej7bUvTxCGafXb81jL5fJ83f2KMXBetZgYp9tUwVaLE7ibtaGlW3vCpotin+tyyiHdFnJ5OXSPC8ewtIT72/Hzlnc5EXOfQLKSfx7zupbuUL2KebSplRDxMortaeyKFUCuVSC4l0PPEoOLt4k/p7Luax03eWDrnQCdNTrCtDshSx4tiRMOPlXPOuuUR2cQOYnDz5IpGXxrHOghSz0qEWtV7jipoqNbf3B9c8Nz1VjZfIogVqw6EC4N3Ruth+pzQpWLfcg2SblpsSASHurE7TrSmu0ViR0QQPzQkm/oyWBcRoBkLEO1l7Cp0z1QnyR1QLlEwwGBBmcDoRJ56YX2Ak/ldxzmXzE/9rMrjLT7QB4KEPEz7V+V9Xt/x0a0OZWqKjNfUsO9HmuxwHdM7aIRRD5lTlqNI9SlAwg68vUzuJ9Ldx3ssV+33g9s/TmNJNfsU5XqasasyV3ixXOlHemtpknq6UDXFSAVw25uc1ytaBD9efQ== asus@NHI'
         sshPassphrase: '12345'
-        sshKeySecureFile: 'id_rsa.pub'
+        sshKeySecureFile: 'id_rsa'
     - task: CopyFiles@2
       displayName: Copy variable file to terraform folder
       inputs:
