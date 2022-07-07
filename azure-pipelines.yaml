@@ -166,6 +166,7 @@ stages:
           targetType: 'inline'
           script: |
             # Write your commands here
+            mkdir log
             jmeter -n -t Starter.jmx\
             -e -o log/StarterReport
           workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter'
