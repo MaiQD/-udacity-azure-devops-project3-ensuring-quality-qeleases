@@ -3,7 +3,7 @@ variables:
 
   python.version: '3.7.6'
 stages:
-- stage: Running Infastructure as Code
+- stage: Running_Infastructure_as_Code
   jobs:
   - job: Build
     pool:
