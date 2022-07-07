@@ -9,11 +9,14 @@ stages:
     pool:
       vmImage: ubuntu-20.04
     steps:
+    # Variable file for creating terraform resources
     - task: DownloadSecureFile@1
       name: downloadtfvars
       displayName: Download terraform.tfvars
       inputs:
         secureFile: 'terraform.tfvars'
+
+    # Needed for Terraform VM deployment
     - task: DownloadSecureFile@1
       name: downloadSSHKey
       displayName: Download SSH Key
@@ -70,12 +73,6 @@ stages:
         commandOptions: '"tfplan"'
         environmentServiceNameAzureRM: 'deploy terraform'
 
-    # Needed for Terraform VM deployment
-    # - task: InstallSSHKey@0
-    #   inputs:
-    #     knownHostsEntry: 'KNOWN_HOSTS_STRING'
-    #     sshPublicKey: 'PUBLIC_KEY'
-    #     sshKeySecureFile: 'id_rsa'
     # - task: ArchiveFiles@2
     #   displayName: 'Archive FakeRestAPI'
     #   inputs:
