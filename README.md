@@ -15,16 +15,18 @@ In this repository, you will use a Packer template and a Terraform template to d
 ## Dependencies
 
 1. Create an [Azure Account](https://portal.azure.com)
-2. Install the [Azure command line interface](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
-3. Install [Terraform](https://www.terraform.io/downloads.html)
-4. Install [JMeter](https://jmeter.apache.org/download_jmeter.cgi).
-5. Install [Postman](https://www.postman.com/downloads/).
-6. Download the latest [Chrome driver](https://sites.google.com/a/chromium.org/chromedriver/)
-7. Install Selenium
+2. Create an [Azure DevOps Account](https://dev.azure.com/)
+3. Install the [Azure command line interface](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
+4. Install [Terraform](https://www.terraform.io/downloads.html)
+5. Install [JMeter](https://jmeter.apache.org/download_jmeter.cgi).
+6. Install [Postman](https://www.postman.com/downloads/).
+7. Download the latest [Chrome driver](https://sites.google.com/a/chromium.org/chromedriver/)
+8. Install Selenium
 ```bash
   pip install -U selenium
   sudo apt-get install -y chromium-browser
 ```
+9. Install [Terraform Extensions for Azure DevOps](https://marketplace.visualstudio.com/items?itemName=ms-devlabs.custom-terraform-tasks)
 ## Instructions
 ### 1. Config Terraforms variables
 
@@ -95,3 +97,4 @@ terraform destroy
 - https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/service_principal_client_secret
 - https://docs.microsoft.com/en-us/azure/developer/terraform/store-state-in-azure-storage?tabs=powershell
 - https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys
+- https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/utility/install-ssh-key?view=azure-devops
