@@ -67,7 +67,7 @@ stages:
         provider: 'azurerm'
         command: 'apply'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-        commandOptions: '"tfplan" -auto-approve'
+        commandOptions: '"tfplan"'
         environmentServiceNameAzureRM: 'deploy terraform'
 
     # Needed for Terraform VM deployment
