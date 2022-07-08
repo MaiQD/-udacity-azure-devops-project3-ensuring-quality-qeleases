@@ -134,35 +134,35 @@ stages:
   #               export PATH=$PATH:some/path
 
 
-# - stage: Integration_Test
-#   jobs:
-#     - job: Running_Integration_Test_With_Newman_Posman
-#       pool:
-#         vmImage: ubuntu-20.04
-#       steps:
-#       - task: CmdLine@2
-#         displayName: Install Newman
-#         inputs:
-#           script: 'sudo npm install -g newman'
-#           workingDirectory: $(System.DefaultWorkingDirectory)
-#       - task: CmdLine@2
-#         displayName: Run Regression Tests
-#         continueOnError: true
-#         inputs:
-#           script: 'newman run AzureDevOpsRegressionTest.postman_collection.json -e StarterApi.postman_environment.json --reporters cli,junit --reporter-junit-export junit-regression-report.xml'
-#           workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
-#       - task: CmdLine@2
-#         displayName: Run Validation Tests
-#         continueOnError: true
-#         inputs:
-#           script: 'newman run AzureDevOpsValidationTest.postman_collection.json -e StarterApi.postman_environment.json --reporters cli,junit --reporter-junit-export junit-validation-report.xml'
-#           workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
-#       - task: PublishTestResults@2
-#         inputs:
-#           testResultsFormat: 'JUnit'
-#           testResultsFiles: '**/junit-*-report.xml'
-#           searchFolder: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
-#           testRunTitle: 'Publish test results'
+- stage: Integration_Test
+  jobs:
+    - job: Running_Integration_Test_With_Newman_Posman
+      pool:
+        vmImage: ubuntu-20.04
+      steps:
+      - task: CmdLine@2
+        displayName: Install Newman
+        inputs:
+          script: 'sudo npm install -g newman'
+          workingDirectory: $(System.DefaultWorkingDirectory)
+      - task: CmdLine@2
+        displayName: Run Regression Tests
+        continueOnError: true
+        inputs:
+          script: 'newman run AzureDevOpsRegressionTest.postman_collection.json -e StarterApi.postman_environment.json --reporters cli,junit --reporter-junit-export junit-regression-report.xml'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+      - task: CmdLine@2
+        displayName: Run Validation Tests
+        continueOnError: true
+        inputs:
+          script: 'newman run AzureDevOpsValidationTest.postman_collection.json -e StarterApi.postman_environment.json --reporters cli,junit --reporter-junit-export junit-validation-report.xml'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+      - task: PublishTestResults@2
+        inputs:
+          testResultsFormat: 'JUnit'
+          testResultsFiles: '**/junit-*-report.xml'
+          searchFolder: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+          testRunTitle: 'Publish test results'
 
 - stage: JMeter_Tests
   jobs:
