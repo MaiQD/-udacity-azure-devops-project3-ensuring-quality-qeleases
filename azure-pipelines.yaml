@@ -134,42 +134,53 @@ stages:
   #               export PATH=$PATH:some/path
 
 
-# - stage: Integration_Test
-#   jobs:
-#     - job: Running_Integration_Test_With_Newman_Posman
-#       pool:
-#         vmImage: ubuntu-20.04
-#       steps:
-#       - task: CmdLine@2
-#         displayName: Install Newman
-#         inputs:
-#           script: 'sudo npm install -g newman'
-#           workingDirectory: $(System.DefaultWorkingDirectory)
-#       - task: CmdLine@2
-#         displayName: Run Regression Tests
-#         continueOnError: true
-#         inputs:
-#           script: 'newman run StarterAPIs.postman_collection.json -e StarterApi.postman_environment.json'
-#           workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
-
-- stage: JMeter_Tests
+- stage: Integration_Test
   jobs:
     - job: Running_Integration_Test_With_Newman_Posman
       pool:
         vmImage: ubuntu-20.04
       steps:
-      - task: JMeterInstaller@0
+      - task: CmdLine@2
+        displayName: Install Newman
         inputs:
-          jmeterVersion: '5.4.2'
-      - task: Bash@3
+          script: 'sudo npm install -g newman'
+          workingDirectory: $(System.DefaultWorkingDirectory)
+      - task: CmdLine@2
+        displayName: Run Regression Tests
+        continueOnError: true
         inputs:
-          targetType: 'inline'
-          script: |
-            # Write your commands here
-            mkdir log
-            jmeter -n -t Starter.jmx \
-            -l log/results.csv \
-            -e -o log/StarterReport
-          workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter'
+          script: 'newman run AzureDevOpsRegressionTest.postman_collection.json -e StarterApi.postman_environment.json --reporters cli,junit --reporter-junit-export junit-regression-report.xml'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+      - task: CmdLine@2
+        displayName: Run Validation Tests
+        continueOnError: true
+        inputs:
+          script: 'newman run AzureDevOpsValidationTest.postman_collection.json -e StarterApi.postman_environment.json --reporters cli,junit --reporter-junit-export junit-validation-report.xml'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+      - task: PublishTestResults@2
+        inputs:
+          testResultsFormat: 'JUnit'
+          testResultsFiles: '**/junit-*-report.xml'
+          searchFolder: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+          testRunTitle: 'Publish test results'
+# - stage: JMeter_Tests
+#   jobs:
+#     - job: Running_Integration_Test_With_Newman_Posman
+#       pool:
+#         vmImage: ubuntu-20.04
+#       steps:
+#       - task: JMeterInstaller@0
+#         inputs:
+#           jmeterVersion: '5.4.2'
+#       - task: Bash@3
+#         inputs:
+#           targetType: 'inline'
+#           script: |
+#             # Write your commands here
+#             mkdir log
+#             jmeter -n -t Starter.jmx \
+#             -l log/results.csv \
+#             -e -o log/StarterReport
+#           workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter'
       
       

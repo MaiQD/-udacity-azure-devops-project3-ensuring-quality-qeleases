@@ -1,0 +1,1014 @@
+{
+	"info": {
+		"_postman_id": "42d64f9b-2f64-4414-8021-5dd2977a2e22",
+		"name": "AzureDevOpsValidationTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9912610"
+	},
+	"item": [
+		{
+			"name": "Activities",
+			"item": [
+				{
+					"name": "Create Activity",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test data validate\", function () {",
+									"    pm.response.to.have.body(`{\"ID\":31,\"Title\":\"string\",\"DueDate\":\"2022-07-07T06:49:23.278Z\",\"Completed\":true}`);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ID\": 31,\n    \"Title\": \"string\",\n    \"DueDate\": \"2022-07-07T06:49:23.278Z\",\n    \"Completed\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/Activities",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"Activities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Activity",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test data validate\", function () {",
+									"    pm.response.to.have.body(`{\"ID\":1,\"Title\":\"string\",\"DueDate\":\"2022-07-07T06:49:23.279Z\",\"Completed\":true}`);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"ID\": 1,\n  \"Title\": \"string\",\n  \"DueDate\": \"2022-07-07T06:49:23.279Z\",\n  \"Completed\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/Activities/1",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"Activities",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Activities",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"var expectedRecords = 30;",
+									"pm.test(`Found record with id from 1 - ${expectedRecords}`, function () {",
+									"    for (i = 0; i < expectedRecords; i++){",
+									"        pm.expect(jsonData[i].ID).to.eql(i+1);",
+									"    }",
+									"});",
+									"pm.test(`Total records found ${expectedRecords}`, function () {",
+									"    pm.expect(jsonData.length).to.eql(expectedRecords);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/Activities",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"Activities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Activity",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Test data validate\", function () {",
+									"    var jsonData = pm.response.json;",
+									"    pm.expect(jsonData.ID,1);",
+									"    pm.expect(jsonData.Title,'Activity 1');",
+									"    pm.expect(jsonData.Completed,false);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/Activities/1",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"Activities",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Activity",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/Activities/1",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"Activities",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authors",
+			"item": [
+				{
+					"name": "Create Author",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test data validate\", function () {",
+									"    pm.response.to.have.body(`{\"ID\":1,\"IDBook\":0,\"FirstName\":null,\"LastName\":null}`);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ID\": 1,\n    \"Title\": \"string\",\n    \"Description\": \"string\",\n    \"PageCount\": 0,\n    \"Excerpt\": \"string\",\n    \"PublishDate\": \"2022-07-07T06:49:23.279Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/Authors",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"Authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Author",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test data validate\", function () {",
+									"    pm.response.to.have.body(`{\"ID\":1,\"IDBook\":0,\"FirstName\":null,\"LastName\":null}`);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ID\": 1,\n    \"Title\": \"string\",\n    \"Description\": \"string\",\n    \"PageCount\": 0,\n    \"Excerpt\": \"string\",\n    \"PublishDate\": \"2022-07-07T06:49:23.279Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/Authors/1",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"Authors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Authors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"var expectedRecords = 400;",
+									"pm.test(`Found record with id from 1 - ${expectedRecords}`, function () {",
+									"    for (i = 0; i < expectedRecords; i++){",
+									"        pm.expect(jsonData[i].ID).to.eql(i+1);",
+									"    }",
+									"});",
+									"pm.test(`Total records found ${expectedRecords}`, function () {",
+									"    pm.expect(jsonData.length).to.eql(expectedRecords);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/Authors",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"Authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Author",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var dataExpect =`{\"ID\":1,\"IDBook\":1,\"FirstName\":\"First Name 1\",\"LastName\":\"Last Name 1\"}`",
+									"pm.test(\"Test data validate\", function () {",
+									"    pm.response.to.have.body(dataExpect);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/Authors/1",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"Authors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Author By Book",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"var jsonData = pm.response.json();",
+									"pm.test(\"IDBook is correct\", function () {",
+									"    for(item of jsonData){",
+									"        pm.expect(item.IDBook).to.eql(1);item.IDBook",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}Authors/Books/1",
+							"host": [
+								"{{baseUrl}}Authors"
+							],
+							"path": [
+								"Books",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Author",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/Authors/1",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"Authors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CoverPhotos",
+			"item": [
+				{
+					"name": "Create CoverPhoto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test data validate\", function () {",
+									"    pm.response.to.have.body(`{\"ID\":1,\"IDBook\":0,\"Url\":null}`);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ID\": 1,\n    \"Title\": \"string\",\n    \"Description\": \"string\",\n    \"PageCount\": 0,\n    \"Excerpt\": \"string\",\n    \"PublishDate\": \"2022-07-07T06:49:23.279Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/CoverPhotos",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"CoverPhotos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update CoverPhoto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test data validate\", function () {",
+									"    pm.response.to.have.body(`{\"ID\":1,\"IDBook\":0,\"Url\":null}`);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ID\": 1,\n    \"Title\": \"string\",\n    \"Description\": \"string\",\n    \"PageCount\": 0,\n    \"Excerpt\": \"string\",\n    \"PublishDate\": \"2022-07-07T06:49:23.279Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/CoverPhotos/1",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"CoverPhotos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All CoverPhotos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"var expectedRecords = 200;",
+									"pm.test(`Found record with id from 1 - ${expectedRecords}`, function () {",
+									"    for (i = 0; i < expectedRecords; i++){",
+									"        pm.expect(jsonData[i].ID).to.eql(i+1);",
+									"    }",
+									"});",
+									"pm.test(`Total records found ${expectedRecords}`, function () {",
+									"    pm.expect(jsonData.length).to.eql(expectedRecords);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/CoverPhotos",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"CoverPhotos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get CoverPhoto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var dataExpect =`{\"ID\":1,\"IDBook\":1,\"Url\":\"https://placeholdit.imgix.net/~text?txtsize=33&txt=Book 1&w=250&h=350\"}`",
+									"pm.test(\"Test data validate\", function () {",
+									"    pm.response.to.have.body(dataExpect);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/CoverPhotos/1",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"CoverPhotos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Cover By Book",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"var jsonData = pm.response.json();",
+									"pm.test(\"IDBook is correct\", function () {",
+									"    for(item of jsonData){",
+									"        pm.expect(item.IDBook).to.eql(1);item.IDBook",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}Books/Covers/1",
+							"host": [
+								"{{baseUrl}}Books"
+							],
+							"path": [
+								"Covers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete CoverPhoto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/CoverPhotos/1",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"CoverPhotos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test data validate\", function () {",
+									"    pm.response.to.have.body(`{\"ID\":1,\"UserName\":\"string\",\"Password\":\"string\"}`);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ID\": 1,\n    \"UserName\": \"string\",\n    \"Password\": \"string\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/Users",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"Users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test data validate\", function () {",
+									"    pm.response.to.have.body(`{\"ID\":1,\"UserName\":\"string\",\"Password\":\"string\"}`);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ID\": 1,\n    \"UserName\": \"string\",\n    \"Password\": \"string\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/Users/1",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"Users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"var expectedRecords = 10;",
+									"pm.test(`Found record with id from 1 - ${expectedRecords}`, function () {",
+									"    for (i = 0; i < expectedRecords; i++){",
+									"        pm.expect(jsonData[i].ID).to.eql(i+1);",
+									"    }",
+									"});",
+									"pm.test(`Total records found ${expectedRecords}`, function () {",
+									"    pm.expect(jsonData.length).to.eql(expectedRecords);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/Users",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"Users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var dataExpect =`{\"ID\":1,\"UserName\":\"User 1\",\"Password\":\"Password1\"}`",
+									"pm.test(\"Test data validate\", function () {",
+									"    pm.response.to.have.body(dataExpect);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/Users/1",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"Users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/Users/1",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"Users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Books",
+			"item": [
+				{
+					"name": "Create Book",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test data validate\", function () {",
+									"    pm.response.to.have.body(`{\"ID\":1,\"Title\":\"string\",\"Description\":\"string\",\"PageCount\":0,\"Excerpt\":\"string\",\"PublishDate\":\"2022-07-07T06:49:23.279Z\"}`);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ID\": 1,\n    \"Title\": \"string\",\n    \"Description\": \"string\",\n    \"PageCount\": 0,\n    \"Excerpt\": \"string\",\n    \"PublishDate\": \"2022-07-07T06:49:23.279Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/Books",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"Books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Book",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test data validate\", function () {",
+									"    pm.response.to.have.body(`{\"ID\":1,\"Title\":\"string\",\"Description\":\"string\",\"PageCount\":0,\"Excerpt\":\"string\",\"PublishDate\":\"2022-07-07T06:49:23.279Z\"}`);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ID\": 1,\n    \"Title\": \"string\",\n    \"Description\": \"string\",\n    \"PageCount\": 0,\n    \"Excerpt\": \"string\",\n    \"PublishDate\": \"2022-07-07T06:49:23.279Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/Books/1",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"Books",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Books",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"var expectedRecords = 200;",
+									"pm.test(`Found record with id from 1 - ${expectedRecords}`, function () {",
+									"    for (i = 0; i < expectedRecords; i++){",
+									"        pm.expect(jsonData[i].ID).to.eql(i+1);",
+									"    }",
+									"});",
+									"pm.test(`Total records found ${expectedRecords}`, function () {",
+									"    pm.expect(jsonData.length).to.eql(expectedRecords);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/Books",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"Books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Book",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Test data validate\", function () {",
+									"    var jsonData = pm.response.json;",
+									"    pm.expect(jsonData.ID,1);",
+									"    pm.expect(jsonData.Title,'Book 1');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/Books/1",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"Books",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Book",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/Books/1",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"Books",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
