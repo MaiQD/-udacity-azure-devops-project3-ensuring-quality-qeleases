@@ -284,7 +284,7 @@
 							"script": {
 								"exec": [
 									"var jsonData = pm.response.json();",
-									"var expectedRecords = 400;",
+									"var expectedRecords = 800;",
 									"pm.test(`Found record with id from 1 - ${expectedRecords}`, function () {",
 									"    for (i = 0; i < expectedRecords; i++){",
 									"        pm.expect(jsonData[i].ID).to.eql(i+1);",

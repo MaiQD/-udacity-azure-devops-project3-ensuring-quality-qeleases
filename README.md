@@ -111,3 +111,4 @@ terraform destroy
 - https://docs.microsoft.com/en-us/azure/developer/terraform/store-state-in-azure-storage?tabs=powershell
 - https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys
 - https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/utility/install-ssh-key?view=azure-devops
+- https://achrafbenalaya.com/2021/10/25/configure-postman-newman-api-tests-in-azure-devops/
