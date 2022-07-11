@@ -175,7 +175,7 @@ stages:
         inputs:
           jmeterVersion: '5.4.2'
       - task: Bash@3
-        displayName: 'Run JMeter Tests'
+        displayName: 'Run JMeter Stress Tests'
         inputs:
           targetType: 'inline'
           script: |
@@ -184,6 +184,12 @@ stages:
             jmeter -n -t StressTests.jmx \
             -l log/StressTestsResults.csv \
             -e -o log/StressTestsReport
+          workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter'
+      - task: Bash@3
+        displayName: 'Run JMeter Endurance Tests'
+        inputs:
+          targetType: 'inline'
+          script: |
             jmeter -n -t EnduranceTests.jmx \
             -l log/EnduranceTestsResults.csv \
             -e -o log/EnduranceTestsReport
