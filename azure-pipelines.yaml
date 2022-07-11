@@ -212,14 +212,12 @@ stages:
           rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter/log/'
           includeRootFolder: true
           archiveType: 'zip'
-          archiveFile: '$(Build.ArtifactStagingDirectory)/Report-$(Build.BuildId).zip'
+          archiveFile: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter/log/Report-$(Build.BuildId).zip'
           replaceExistingArchive: true
-      - task: PublishBuildArtifacts@1
-        displayName: "Publish Report zip"
+      - task: PublishPipelineArtifact@1
         inputs:
-          PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-          ArtifactName: 'Report'
-          publishLocation: 'Container'
+          targetPath: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter/log/Report-$(Build.BuildId).zip'
+          publishLocation: 'pipeline'
       - task: Bash@3
         displayName: 'Print jmeter log'
         inputs:
