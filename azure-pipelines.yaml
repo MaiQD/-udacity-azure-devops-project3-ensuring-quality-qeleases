@@ -196,13 +196,6 @@ stages:
             ls -1 log
           workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter'
       
-      - task: Bash@3
-        displayName: 'Log'
-        inputs:
-          targetType: 'inline'
-          script: |
-            echo "$PWD"
-          workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter'
       - task: publishhtmlreport@1
         displayName: 'Export JMeter Stress Tests Report'
         inputs:
@@ -213,6 +206,20 @@ stages:
         inputs:
           htmlType: 'Jmeter'
           JmeterReportsPath: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter/log/EnduranceTestsReport'
+      - task: ArchiveFiles@2
+        displayName: "Archive Report file to zip"
+        inputs:
+          rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter/log/'
+          includeRootFolder: true
+          archiveType: 'zip'
+          archiveFile: '$(Build.ArtifactStagingDirectory)/Report-$(Build.BuildId).zip'
+          replaceExistingArchive: true
+      - task: PublishBuildArtifacts@1
+        displayName: "Publish Report zip"
+        inputs:
+          PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+          ArtifactName: 'Report'
+          publishLocation: 'Container'
       - task: Bash@3
         displayName: 'Print jmeter log'
         inputs:
