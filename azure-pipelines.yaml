@@ -193,6 +193,15 @@ stages:
             jmeter -n -t EnduranceTests.jmx \
             -l log/EnduranceTestsResults.csv \
             -e -o log/EnduranceTestsReport
+            ls -1 log
+          workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter'
+      
+      - task: Bash@3
+        displayName: 'Log'
+        inputs:
+          targetType: 'inline'
+          script: |
+            echo "$PWD"
           workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter'
       - task: publishhtmlreport@1
         displayName: 'Export JMeter Stress Tests Report'
