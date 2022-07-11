@@ -112,3 +112,4 @@ terraform destroy
 - https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys
 - https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/utility/install-ssh-key?view=azure-devops
 - https://achrafbenalaya.com/2021/10/25/configure-postman-newman-api-tests-in-azure-devops/
+- https://marketplace.visualstudio.com/items?itemName=LakshayKaushik.PublishHTMLReports&targetId=51ab0e12-dad6-4865-9031-38717aa65e6e&utm_source=vstsproduct&utm_medium=ExtHubManageList

@@ -166,25 +166,41 @@ stages:
 
 - stage: JMeter_Tests
   jobs:
-    - job: Running_Integration_Test_With_Newman_Posman
+    - job: Running_Performance_Tests_With_JMeter
       pool:
         vmImage: ubuntu-20.04
       steps:
       - task: JMeterInstaller@0
+        displayName: 'Install JMeter'
         inputs:
           jmeterVersion: '5.4.2'
       - task: Bash@3
+        displayName: 'Run JMeter Tests'
         inputs:
           targetType: 'inline'
           script: |
             # Write your commands here
             mkdir log
-            jmeter -n -t Starter.jmx \
-            -l log/results.csv \
-            -e -o log/StarterReport
+            jmeter -n -t StressTests.jmx \
+            -l log/StressTestsResults.csv \
+            -e -o log/StressTestsReport
+            jmeter -n -t EnduranceTests.jmx \
+            -l log/EnduranceTestsResults.csv \
+            -e -o log/EnduranceTestsReport
           workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter'
       - task: publishhtmlreport@1
+        displayName: 'Export JMeter Stress Tests Report'
         inputs:
           htmlType: 'Jmeter'
-          JmeterReportsPath: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter/log/StarterReport'
-      
+          JmeterReportsPath: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter/log/StressTestsReport'
+      - task: publishhtmlreport@1
+        displayName: 'Export JMeter Endurance Tests Report'
+        inputs:
+          htmlType: 'Jmeter'
+          JmeterReportsPath: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter/log/EnduranceTestsReport'
+      - task: Bash@3
+        displayName: 'Print jmeter log'
+        inputs:
+          targetType: 'inline'
+          script: 'cat jmeter.log'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter'
