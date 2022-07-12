@@ -274,6 +274,8 @@ stages:
               inputs:
                 targetType: 'inline'
                 script: |
+                  # Set Path environment 
+                  export PATH=$PATH:/home/datmq1/chromedriver_linux64/
                   #run test
                   python3 login.py > ui-logs.log
                   cat ui-logs.log
