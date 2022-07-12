@@ -45,7 +45,7 @@ def remove_cart(driver, n):
         driver.find_element_by_css_selector("a#item_"+str(i)+"_title_link").click()
         print(current_time() + 'Navigated to product detail page.')
 
-        driver.find_element_by_css_selector("button.btn.btn_primary.btn_small.btn_inventory").click()
+        driver.find_element_by_css_selector("button.btn.btn_secondary.btn_small.btn_inventory").click()
         product_name = driver.find_element_by_css_selector("div.inventory_details_name.large_size").text
         print(current_time() + 'Remove {:s} from cart.'.format(product_name))
 
@@ -54,7 +54,7 @@ def remove_cart(driver, n):
     print(current_time() + 'Remove {:d} items from cart successfully.'.format(n))
     print('\n')
 
-    
+
 print ('Starting the browser...')
 print('\n')
 # --uncomment when running in Azure DevOps.
