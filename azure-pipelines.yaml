@@ -271,6 +271,7 @@ stages:
         deploy:
           steps:
             - task: Bash@3
+              displayName: 'Run Selenium tests'
               inputs:
                 targetType: 'inline'
                 script: |
