@@ -90,7 +90,19 @@ stages:
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
       displayName: 'Upload Package'
       artifact: drop-fakerestapi
-    
+    - task: ArchiveFiles@2
+      displayName: 'Archive Selenium Files'
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automatedtesting/selenium'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-selenium.zip'
+        replaceExistingArchive: true
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-selenium.zip'
+        artifact: 'selenium'
+        publishLocation: 'pipeline'
     
 - stage: Deploy
   jobs:
@@ -131,6 +143,29 @@ stages:
                 sudo apt-get install -y chromium-browser
                 pip3 install selenium
                 export PATH=$PATH:some/path
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              buildType: 'current'
+              artifactName: 'selenium'
+              targetPath: '$(Pipeline.Workspace)/selenium'
+          
+          - task: ExtractFiles@1
+            inputs:
+              archiveFilePatterns: '$(Pipeline.Workspace)/selenium/*.zip'
+              destinationFolder: '$(Pipeline.Workspace)/selenium/tests'
+              cleanDestinationFolder: true
+              overwriteExistingFiles: true
+          - task: Bash@3
+            displayName: 'Show file in folder selenium'
+            inputs:
+              targetType: 'inline'
+              script: |
+                echo "$PWD"
+                echo 'Show folder selenium'
+                ls -1 
+                echo 'Show folder selenium/tests'
+                ls -1 tests
+              workingDirectory: '$(Pipeline.Workspace)/selenium'
 # - stage: Integration_Test
 #   jobs:
 #     - job: Running_Integration_Test_With_Newman_Posman
@@ -222,6 +257,21 @@ stages:
 #           script: 'cat jmeter.log'
 #           workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter'
 
-# - stage: UI_Test_with_Selenium
-#   jobs:
-  
+- stage: UI_Test_with_Selenium
+  jobs:
+  - deployment: VMSeleniumTests
+    displayName: 'Running Selenium tests'
+    environment:
+      name: VM_TEST
+      resourceName: VirtualMachine
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - task: Bash@3
+              inputs:
+                targetType: 'inline'
+                script: |
+                  #run test
+                  python3 login.py
+                workingDirectory: '$(Pipeline.Workspace)/selenium/tests'
