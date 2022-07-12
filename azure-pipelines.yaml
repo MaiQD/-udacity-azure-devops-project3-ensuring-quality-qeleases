@@ -3,76 +3,76 @@ variables:
 
   python.version: '3.7.6'
 stages:
-# - stage: Running_Infastructure_as_Code
-#   jobs:
-#   - job: Build
-#     pool:
-#       vmImage: ubuntu-20.04
-#     steps:
-#     # Variable file for creating terraform resources
-#     - task: DownloadSecureFile@1
-#       name: downloadtfvars
-#       displayName: Download terraform.tfvars
-#       inputs:
-#         secureFile: 'terraform.tfvars'
+- stage: Running_Infastructure_as_Code
+  jobs:
+  - job: Build
+    pool:
+      vmImage: ubuntu-20.04
+    steps:
+    # Variable file for creating terraform resources
+    - task: DownloadSecureFile@1
+      name: downloadtfvars
+      displayName: Download terraform.tfvars
+      inputs:
+        secureFile: 'terraform.tfvars'
 
-#     # Needed for Terraform VM deployment
-#     - task: DownloadSecureFile@1
-#       name: downloadSSHKey
-#       displayName: Download SSH Key
-#       inputs:
-#         secureFile: 'id_rsa.pub'
-#     - task: InstallSSHKey@0
-#       inputs:
-#         knownHostsEntry: 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=='
-#         sshPublicKey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC/18rZR36phPmFC2u5b2/RK5S5uALnAYPfOs2WTKobrU+Iv4pXwVomVCdjODZygNFE9QXiE4R+cKo6qfivg4I7MOXrSukRAm8fzaoAmkByM4myHMXQGHQ0vEsoB0X80VsSFbY7/nciD66YPYNHWzJsgXLuZnQOjOc2ZugXL012kEbcrNEv3Su04U6DhBq1Qej7bUvTxCGafXb81jL5fJ83f2KMXBetZgYp9tUwVaLE7ibtaGlW3vCpotin+tyyiHdFnJ5OXSPC8ewtIT72/Hzlnc5EXOfQLKSfx7zupbuUL2KebSplRDxMortaeyKFUCuVSC4l0PPEoOLt4k/p7Luax03eWDrnQCdNTrCtDshSx4tiRMOPlXPOuuUR2cQOYnDz5IpGXxrHOghSz0qEWtV7jipoqNbf3B9c8Nz1VjZfIogVqw6EC4N3Ruth+pzQpWLfcg2SblpsSASHurE7TrSmu0ViR0QQPzQkm/oyWBcRoBkLEO1l7Cp0z1QnyR1QLlEwwGBBmcDoRJ56YX2Ak/ldxzmXzE/9rMrjLT7QB4KEPEz7V+V9Xt/x0a0OZWqKjNfUsO9HmuxwHdM7aIRRD5lTlqNI9SlAwg68vUzuJ9Ldx3ssV+33g9s/TmNJNfsU5XqasasyV3ixXOlHemtpknq6UDXFSAVw25uc1ytaBD9efQ== asus@NHI'
-#         sshPassphrase: '12345'
-#         sshKeySecureFile: 'id_rsa'
-#     - task: CopyFiles@2
-#       displayName: Copy variable file to terraform folder
-#       inputs:
-#         SourceFolder: '$(Agent.TempDirectory)'
-#         Contents: '**'
-#         TargetFolder: '$(System.DefaultWorkingDirectory)/terraform'
-#         OverWrite: true
-#     - task: TerraformInstaller@0
-#       displayName: install terraform
-#       inputs:
-#         terraformVersion: 'latest'
+    # Needed for Terraform VM deployment
+    - task: DownloadSecureFile@1
+      name: downloadSSHKey
+      displayName: Download SSH Key
+      inputs:
+        secureFile: 'id_rsa.pub'
+    - task: InstallSSHKey@0
+      inputs:
+        knownHostsEntry: 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=='
+        sshPublicKey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC/18rZR36phPmFC2u5b2/RK5S5uALnAYPfOs2WTKobrU+Iv4pXwVomVCdjODZygNFE9QXiE4R+cKo6qfivg4I7MOXrSukRAm8fzaoAmkByM4myHMXQGHQ0vEsoB0X80VsSFbY7/nciD66YPYNHWzJsgXLuZnQOjOc2ZugXL012kEbcrNEv3Su04U6DhBq1Qej7bUvTxCGafXb81jL5fJ83f2KMXBetZgYp9tUwVaLE7ibtaGlW3vCpotin+tyyiHdFnJ5OXSPC8ewtIT72/Hzlnc5EXOfQLKSfx7zupbuUL2KebSplRDxMortaeyKFUCuVSC4l0PPEoOLt4k/p7Luax03eWDrnQCdNTrCtDshSx4tiRMOPlXPOuuUR2cQOYnDz5IpGXxrHOghSz0qEWtV7jipoqNbf3B9c8Nz1VjZfIogVqw6EC4N3Ruth+pzQpWLfcg2SblpsSASHurE7TrSmu0ViR0QQPzQkm/oyWBcRoBkLEO1l7Cp0z1QnyR1QLlEwwGBBmcDoRJ56YX2Ak/ldxzmXzE/9rMrjLT7QB4KEPEz7V+V9Xt/x0a0OZWqKjNfUsO9HmuxwHdM7aIRRD5lTlqNI9SlAwg68vUzuJ9Ldx3ssV+33g9s/TmNJNfsU5XqasasyV3ixXOlHemtpknq6UDXFSAVw25uc1ytaBD9efQ== asus@NHI'
+        sshPassphrase: '12345'
+        sshKeySecureFile: 'id_rsa'
+    - task: CopyFiles@2
+      displayName: Copy variable file to terraform folder
+      inputs:
+        SourceFolder: '$(Agent.TempDirectory)'
+        Contents: '**'
+        TargetFolder: '$(System.DefaultWorkingDirectory)/terraform'
+        OverWrite: true
+    - task: TerraformInstaller@0
+      displayName: install terraform
+      inputs:
+        terraformVersion: 'latest'
 
-#     - task: TerraformTaskV3@3
-#       displayName: 'Init Terraform'
-#       inputs:
-#         provider: 'azurerm'
-#         command: 'init'
-#         backendServiceArm: 'deploy terraform'
-#         backendAzureRmResourceGroupName: 'az-terraform'
-#         backendAzureRmStorageAccountName: 'terraformstoragedatmq'
-#         backendAzureRmContainerName: 'terraform'
-#         backendAzureRmKey: 'terraformState'
-#         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-#     - task: TerraformTaskV3@3
-#       displayName: 'Validate Terraform'
-#       inputs:
-#         provider: 'azurerm'
-#         command: 'validate'
-#         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-#     - task: TerraformTaskV3@3
-#       displayName: 'Plan Terraform'
-#       inputs:
-#         provider: 'azurerm'
-#         command: 'plan'
-#         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-#         commandOptions: '-out=tfplan -var-file=terraform.tfvars -var="ssh_public_key_path=$(downloadSSHKey.secureFilePath)"'
-#         environmentServiceNameAzureRM: 'deploy terraform'
-#     - task: TerraformTaskV3@3
-#       displayName: 'Apply Terraform'
-#       inputs:
-#         provider: 'azurerm'
-#         command: 'apply'
-#         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-#         commandOptions: '"tfplan"'
-#         environmentServiceNameAzureRM: 'deploy terraform'
+    - task: TerraformTaskV3@3
+      displayName: 'Init Terraform'
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        backendServiceArm: 'deploy terraform'
+        backendAzureRmResourceGroupName: 'az-terraform'
+        backendAzureRmStorageAccountName: 'terraformstoragedatmq'
+        backendAzureRmContainerName: 'terraform'
+        backendAzureRmKey: 'terraformState'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+    - task: TerraformTaskV3@3
+      displayName: 'Validate Terraform'
+      inputs:
+        provider: 'azurerm'
+        command: 'validate'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+    - task: TerraformTaskV3@3
+      displayName: 'Plan Terraform'
+      inputs:
+        provider: 'azurerm'
+        command: 'plan'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+        commandOptions: '-out=tfplan -var-file=terraform.tfvars -var="ssh_public_key_path=$(downloadSSHKey.secureFilePath)"'
+        environmentServiceNameAzureRM: 'deploy terraform'
+    - task: TerraformTaskV3@3
+      displayName: 'Apply Terraform'
+      inputs:
+        provider: 'azurerm'
+        command: 'apply'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+        commandOptions: '"tfplan"'
+        environmentServiceNameAzureRM: 'deploy terraform'
 
 - stage: Build
   jobs:
@@ -168,96 +168,96 @@ stages:
                 echo 'Show folder selenium/tests'
                 ls -1 tests
               workingDirectory: '$(Pipeline.Workspace)/selenium'
-# - stage: Integration_Test
-#   jobs:
-#     - job: Running_Integration_Test_With_Newman_Posman
-#       pool:
-#         vmImage: ubuntu-20.04
-#       steps:
-#       - task: CmdLine@2
-#         displayName: Install Newman
-#         inputs:
-#           script: 'sudo npm install -g newman'
-#           workingDirectory: $(System.DefaultWorkingDirectory)
-#       - task: CmdLine@2
-#         displayName: Run Regression Tests
-#         continueOnError: true
-#         inputs:
-#           script: 'newman run AzureDevOpsRegressionTest.postman_collection.json -e StarterApi.postman_environment.json --reporters cli,junit --reporter-junit-export junit-regression-report.xml'
-#           workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
-#       - task: CmdLine@2
-#         displayName: Run Validation Tests
-#         continueOnError: true
-#         inputs:
-#           script: 'newman run AzureDevOpsValidationTest.postman_collection.json -e StarterApi.postman_environment.json --reporters cli,junit --reporter-junit-export junit-validation-report.xml'
-#           workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
-#       - task: PublishTestResults@2
-#         inputs:
-#           testResultsFormat: 'JUnit'
-#           testResultsFiles: '**/junit-*-report.xml'
-#           searchFolder: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
-#           testRunTitle: 'Publish test results'
+- stage: Integration_Test
+  jobs:
+    - job: Running_Integration_Test_With_Newman_Posman
+      pool:
+        vmImage: ubuntu-20.04
+      steps:
+      - task: CmdLine@2
+        displayName: Install Newman
+        inputs:
+          script: 'sudo npm install -g newman'
+          workingDirectory: $(System.DefaultWorkingDirectory)
+      - task: CmdLine@2
+        displayName: Run Regression Tests
+        continueOnError: true
+        inputs:
+          script: 'newman run AzureDevOpsRegressionTest.postman_collection.json -e StarterApi.postman_environment.json --reporters cli,junit --reporter-junit-export junit-regression-report.xml'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+      - task: CmdLine@2
+        displayName: Run Validation Tests
+        continueOnError: true
+        inputs:
+          script: 'newman run AzureDevOpsValidationTest.postman_collection.json -e StarterApi.postman_environment.json --reporters cli,junit --reporter-junit-export junit-validation-report.xml'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+      - task: PublishTestResults@2
+        inputs:
+          testResultsFormat: 'JUnit'
+          testResultsFiles: '**/junit-*-report.xml'
+          searchFolder: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+          testRunTitle: 'Publish test results'
 
-# - stage: JMeter_Tests
-#   jobs:
-#     - job: Running_Performance_Tests_With_JMeter
-#       pool:
-#         vmImage: ubuntu-20.04
-#       steps:
-#       - task: JMeterInstaller@0
-#         displayName: 'Install JMeter'
-#         inputs:
-#           jmeterVersion: '5.4.2'
-#       - task: Bash@3
-#         displayName: 'Run JMeter Stress Tests'
-#         inputs:
-#           targetType: 'inline'
-#           script: |
-#             # Write your commands here
-#             mkdir log
-#             jmeter -n -t StressTests.jmx \
-#             -l log/StressTestsResults.csv \
-#             -e -o log/StressTestsReport
-#           workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter'
-#       - task: Bash@3
-#         displayName: 'Run JMeter Endurance Tests'
-#         inputs:
-#           targetType: 'inline'
-#           script: |
-#             jmeter -n -t EnduranceTests.jmx \
-#             -l log/EnduranceTestsResults.csv \
-#             -e -o log/EnduranceTestsReport
-#             ls -1 log
-#           workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter'
+- stage: JMeter_Tests
+  jobs:
+    - job: Running_Performance_Tests_With_JMeter
+      pool:
+        vmImage: ubuntu-20.04
+      steps:
+      - task: JMeterInstaller@0
+        displayName: 'Install JMeter'
+        inputs:
+          jmeterVersion: '5.4.2'
+      - task: Bash@3
+        displayName: 'Run JMeter Stress Tests'
+        inputs:
+          targetType: 'inline'
+          script: |
+            # Write your commands here
+            mkdir log
+            jmeter -n -t StressTests.jmx \
+            -l log/StressTestsResults.csv \
+            -e -o log/StressTestsReport
+          workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter'
+      - task: Bash@3
+        displayName: 'Run JMeter Endurance Tests'
+        inputs:
+          targetType: 'inline'
+          script: |
+            jmeter -n -t EnduranceTests.jmx \
+            -l log/EnduranceTestsResults.csv \
+            -e -o log/EnduranceTestsReport
+            ls -1 log
+          workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter'
       
-#       - task: publishhtmlreport@1
-#         displayName: 'Export JMeter Stress Tests Report'
-#         inputs:
-#           htmlType: 'Jmeter'
-#           JmeterReportsPath: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter/log/StressTestsReport'
-#       - task: publishhtmlreport@1
-#         displayName: 'Export JMeter Endurance Tests Report'
-#         inputs:
-#           htmlType: 'Jmeter'
-#           JmeterReportsPath: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter/log/EnduranceTestsReport'
-#       - task: ArchiveFiles@2
-#         displayName: "Archive Report file to zip"
-#         inputs:
-#           rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter/log/'
-#           includeRootFolder: true
-#           archiveType: 'zip'
-#           archiveFile: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter/log/Report-$(Build.BuildId).zip'
-#           replaceExistingArchive: true
-#       - task: PublishPipelineArtifact@1
-#         inputs:
-#           targetPath: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter/log/Report-$(Build.BuildId).zip'
-#           publishLocation: 'pipeline'
-#       - task: Bash@3
-#         displayName: 'Print jmeter log'
-#         inputs:
-#           targetType: 'inline'
-#           script: 'cat jmeter.log'
-#           workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter'
+      - task: publishhtmlreport@1
+        displayName: 'Export JMeter Stress Tests Report'
+        inputs:
+          htmlType: 'Jmeter'
+          JmeterReportsPath: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter/log/StressTestsReport'
+      - task: publishhtmlreport@1
+        displayName: 'Export JMeter Endurance Tests Report'
+        inputs:
+          htmlType: 'Jmeter'
+          JmeterReportsPath: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter/log/EnduranceTestsReport'
+      - task: ArchiveFiles@2
+        displayName: "Archive Report file to zip"
+        inputs:
+          rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter/log/'
+          includeRootFolder: true
+          archiveType: 'zip'
+          archiveFile: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter/log/Report-$(Build.BuildId).zip'
+          replaceExistingArchive: true
+      - task: PublishPipelineArtifact@1
+        inputs:
+          targetPath: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter/log/Report-$(Build.BuildId).zip'
+          publishLocation: 'pipeline'
+      - task: Bash@3
+        displayName: 'Print jmeter log'
+        inputs:
+          targetType: 'inline'
+          script: 'cat jmeter.log'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter'
 
 - stage: UI_Test_with_Selenium
   jobs:

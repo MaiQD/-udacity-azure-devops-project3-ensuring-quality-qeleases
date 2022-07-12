@@ -105,6 +105,11 @@ terraform destroy
     - id_rsa (secret key from the ssh key we created in step 1)
     - terraform.tfvars (terraform variables file)
     ![Sercure file](./assets/images/securefiles.png)
+### 4. Go to the VM and download chrome driver
+1. Go to the VM and download the chrome driver.
+2. Unzip the chrome driver.
+3. Copy the chrome driver to the directory of the VM.
+4. Copy the path of the chrome driver to the <code>azure-pipelines.yaml</code> file line <code>279</code>.
 ## Output
 ## References:
 - https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/service_principal_client_secret
@@ -114,3 +119,4 @@ terraform destroy
 - https://achrafbenalaya.com/2021/10/25/configure-postman-newman-api-tests-in-azure-devops/
 - https://marketplace.visualstudio.com/items?itemName=LakshayKaushik.PublishHTMLReports&targetId=51ab0e12-dad6-4865-9031-38717aa65e6e&utm_source=vstsproduct&utm_medium=ExtHubManageList
 - https://docs.microsoft.com/en-us/azure/devops/pipelines/publish-pipeline-artifact?view=azure-devops&tabs=yaml
+https://docs.microsoft.com/en-us/azure/azure-monitor/agents/data-sources-custom-logs
