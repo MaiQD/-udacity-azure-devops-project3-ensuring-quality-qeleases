@@ -163,10 +163,17 @@ stages:
               targetType: 'inline'
               script: |
                 echo "$PWD"
+                
+                echo 'Show folder selenium/tests'
+                ls -1 tests 
+
+                echo 'remove zip file'
+                rm *.zip
+                echo 'Create folder selenium/logs'
+                mkdir -p logs
+
                 echo 'Show folder selenium'
                 ls -1 
-                echo 'Show folder selenium/tests'
-                ls -1 tests
               workingDirectory: '$(Pipeline.Workspace)/selenium'
 - stage: Integration_Test
   jobs:
@@ -278,6 +285,6 @@ stages:
                   # Set Path environment 
                   export PATH=$PATH:/home/datmq1/chromedriver_linux64/
                   #run test
-                  python3 login.py > ui-logs-$(Build.BuildId).log
-                  cat ui-logs-$(Build.BuildId).log
+                  python3 login.py > ../logs/ui-logs-$(Build.BuildId).log
+                  cat ../logs/ui-logs-$(Build.BuildId).log
                 workingDirectory: '$(Pipeline.Workspace)/selenium/tests'

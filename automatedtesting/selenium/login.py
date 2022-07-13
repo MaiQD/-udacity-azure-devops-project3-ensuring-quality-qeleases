@@ -55,7 +55,7 @@ def remove_cart(driver, n):
     print('\n')
 
 
-print ('Starting the browser...')
+print (current_time() + 'Starting the browser...')
 print('\n')
 # --uncomment when running in Azure DevOps.
 options = ChromeOptions()
