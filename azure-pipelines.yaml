@@ -285,7 +285,7 @@ stages:
                   # Set Path environment 
                   export PATH=$PATH:/home/datmq1/chromedriver_linux64/
                   #run test
-                  python3 login.py | tee -a ../logs/ui-logs.log
+                  python3 login.pys
                   sudo chmod 775 ../logs/ui-logs.log
                   echo 'print logs'
                   cat ../logs/ui-logs.log
