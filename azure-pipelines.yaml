@@ -106,21 +106,21 @@ stages:
     
 - stage: Deploy
   jobs:
-  - deployment: FakeRestAPI
-    pool:
-      vmImage: ubuntu-20.04
-    environment: 'TEST'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: AzureWebApp@1
-            displayName: 'Deploy Azure Web App'
-            inputs:
-              azureSubscription: 'deploy terraform'
-              appName: 'datmq-AppService'
-              appType: webApp
-              package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
+  #  - deployment: FakeRestAPI
+    # pool:
+    #   vmImage: ubuntu-20.04
+    # environment: 'TEST'
+    # strategy:
+    #   runOnce:
+    #     deploy:
+    #       steps:
+    #       - task: AzureWebApp@1
+    #         displayName: 'Deploy Azure Web App'
+    #         inputs:
+    #           azureSubscription: 'deploy terraform'
+    #           appName: 'datmq-AppService'
+    #           appType: webApp
+    #           package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
   - deployment: VMDeploy
     displayName: 'Deploy VM'
     environment:
@@ -285,7 +285,8 @@ stages:
                   # Set Path environment 
                   export PATH=$PATH:/home/datmq1/chromedriver_linux64/
                   #run test
-                  python3 login.py > ../logs/ui-logs-$(Build.BuildId).log
+                  #python3 login.py > ../logs/ui-logs-$(Build.BuildId).log
+                  python3 login.py | tee -a ../logs/ui-logs-$(Build.BuildId).log
                   sudo chmod 775 ../logs/ui-logs-$(Build.BuildId).log
                   cat ../logs/ui-logs-$(Build.BuildId).log
                 workingDirectory: '$(Pipeline.Workspace)/selenium/tests'
