@@ -110,7 +110,29 @@ terraform destroy
 2. Unzip the chrome driver.
 3. Copy the chrome driver to the directory of the VM.
 4. Copy the path of the chrome driver to the <code>azure-pipelines.yaml</code> file line <code>279</code>.
+
+### 5. Alert and Monitor
+1. Create alert 404
+- Go to App service > Alert
+- Create alert rule with action group send email when app recieve 404 code
+2. Create custom logs for selenium files in the VM
+- Go to Azure Logs Analytics > Custom Logs
+- Create a new custom log with the following name: <b>selenium_logs</b>
+- Add path to the custom log: <b>/home/datmq1/azagent/_work/1/selenium/logs/ui-logs.log</b>
+- Connect the VM to the the Log Analytics workspace. <b>Importance: Config VM network outbound to allow port 443-https</b>
 ## Output
+![Pipeline](./assets/images/pipeline.png)
+> <b>Running_Infastructure_as_Code</b>: using Terraform to create resources in Azure
+
+> <b>Build</b>: Build the FakeRestAPI project, zip selenium test suits and publish artifacts to the Azure DevOps pipeline 
+
+> <b>Deploy</b>: Deploy the FakeRestAPI project to Azure. Deploy the selenium to Azure VM.
+
+> <b>Integration_Test</b>: Using Newman to test regression and validate the API from Postman file.
+
+> <b>JMeter_Test</b>: Using Jmeter to stress test and endurance test the API.
+
+> <b>UI_Test_with_Selenium</b>: Using Selenium to test the UI.
 ## References:
 - https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/service_principal_client_secret
 - https://docs.microsoft.com/en-us/azure/developer/terraform/store-state-in-azure-storage?tabs=powershell
