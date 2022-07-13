@@ -220,10 +220,10 @@ stages:
         inputs:
           targetType: 'inline'
           script: |
+            mkdir -p log
             jmeter -n -t EnduranceTests.jmx \
             -l log/EnduranceTestsResults.csv \
             -e -o log/EnduranceTestsReport
-            ls -1 log
           workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter'
       - task: Bash@3
         displayName: 'Run JMeter Stress Tests'
@@ -231,10 +231,10 @@ stages:
           targetType: 'inline'
           script: |
             # Write your commands here
-            mkdir log
             jmeter -n -t StressTests.jmx \
             -l log/StressTestsResults.csv \
             -e -o log/StressTestsReport
+            ls -1 log
           workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter'
       
       - task: publishhtmlreport@1
