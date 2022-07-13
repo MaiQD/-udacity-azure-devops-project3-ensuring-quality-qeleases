@@ -285,8 +285,8 @@ stages:
                   # Set Path environment 
                   export PATH=$PATH:/home/datmq1/chromedriver_linux64/
                   #run test
-                  #python3 login.py > ../logs/ui-logs-$(Build.BuildId).log
-                  python3 login.py | tee -a ../logs/ui-logs-$(Build.BuildId).log
-                  sudo chmod 775 ../logs/ui-logs-$(Build.BuildId).log
-                  cat ../logs/ui-logs-$(Build.BuildId).log
+                  python3 login.py | tee -a ../logs/ui-logs.log
+                  sudo chmod 775 ../logs/ui-logs.log
+                  echo 'print logs'
+                  cat ../logs/ui-logs.log
                 workingDirectory: '$(Pipeline.Workspace)/selenium/tests'

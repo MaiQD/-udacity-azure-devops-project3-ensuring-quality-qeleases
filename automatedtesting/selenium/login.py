@@ -9,8 +9,9 @@ logging.basicConfig(
     datefmt='%Y-%m-%d %H:%M:%S')
 
 def current_time():
-    ts = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    return (ts + '\t')
+    # ts = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    # return (ts + '\t')
+    return ''
 
 # Start the browser and login with standard_user
 def login (driver, user, password):
